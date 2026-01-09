@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<style>
+    #myForm{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh
+    }
+
+    fieldset{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .form-group{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #error-message{
+        display: none;
+        font-size: 14px;
+        margin-top: 5px;
+        color: red;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first C# Javascript Web</title>  
+</head>
+<body>
+    <h1>Hello, Everyone!</h1>
+
+    <form id="myForm">
+        <fieldset>
+            <legend>Enter your email</legend>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Enter your email">
+                    <div id="error-message"></div>
+                </div>
+                <button type="submit">submit</button>
+        </fieldset>
+    </form>
+
+    <script>
+        const emailInput = document.getElementById("email");
+        const errorMessage = document.getElementById("error-message");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        //當輸入框失去焦點時立即驗證
+        emailInput.addEventListener("blur", function(){
+            const email = this.value.trim();
+
+            if(email === ""){
+                errorMessage.style.display = "none";
+                errorMessage.textContent = "";
+                return;
+            }
+
+            const isValid = emailRegex.test(email);
+            errorMessage.textContent = isValid ? "" : "請輸入有效的電子郵件";
+            errorMessage.style.display =isValid ? "none" : "block";
+        });
+
+        document.getElementById("myForm").addEventListener("submit", function(event){
+            const email = emailInput.value.trim(); //去除字串兩端的空白字元
+
+            if(!email){
+                event.preventDefault();
+                errorMessage.textContent = "請輸入電子郵件";
+                errorMessage.style.display = "block";
+                return false
+            }
+
+            if(!emailRegex.test(email)){
+                event.preventDefault();
+                errorMessage.textContent = "請輸入有效的電子郵件";
+                errorMessage.style.display = "block";
+                return false
+            }
+
+            errorMessage.textContent = "";
+            errorMessage.style.display = "none";
+            console.log("驗證通過, 準備提交")
+        });
+        
+    </script>
+</body>
+</html>

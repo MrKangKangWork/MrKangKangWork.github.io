@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 可以放在head中 -->
+    <script>
+        console.log("Script in head")
+    </script>
+    <title>My first C# Javascript Web</title>  
+</head>
+<body>
+    <h1>Hello, Everyone!</h1>
+    <p id="message">Original content</p>
+    <button id="myButton">click me</button>
+
+    <!-- script可放在body中，通常放在body結束前 -->
+    <script>
+        //一般訊息
+        console.log("一般訊息");
+        //顯示時間
+        console.log("Now: " + new Date().toLocaleString());
+
+        //警告訊息
+        console.warn("警告訊息");
+
+        //錯誤訊息
+        console.error("錯誤訊息");
+
+        //資訊訊息
+        console.info("資訊訊息");
+
+        //彈出視窗
+        alert("彈出視窗");
+
+        //等待網頁載入完成再執行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("web load complete !!");
+
+            //修改文字
+            document.getElementById('message').textContent = 'JavaScript already success load!!';
+
+            //按鈕添加點擊功能
+            document.getElementById('myButton').addEventListener('click', function() {
+                alert('Button is clicked');
+            });
+        });
+
+        //使用 let 宣告可以改變的變數
+        let name = "小明";
+        let age = 25;
+        // 使用const 宣告不可改變的變數
+        const PI = 3.1415926;
+        //PI = 123456 //發生錯誤
+
+        console.log(name);
+        console.log(age);
+
+        name = "小李";
+        age = 25;
+
+        console.log(name);
+        console.log(age);
+        
+        //const 物件和陣列內容可以修改
+        const student = { name: "小吳", age: 31 };
+        student.age = 55;
+        console.log(student.age);
+
+        //全域變數與區域變數
+        let globalVar = "globalVar"; //全域變數
+        {
+            let localVar = "localVar"; //區域變數
+            console.log(globalVar);
+            console.log(localVar);
+        }
+        console.log(globalVar);
+        //console.log(localVar); //錯誤!區域變數只存在{}裡
+
+        //整數
+        let userAge = 25;
+        let count = 100;
+
+        //小數
+        let price = 299.99;
+        let temperature = 36.5;
+
+        //負數
+        let debt = -1000;
+        let freezingPoint = -273.15;
+
+        console.log(userAge); //25
+        console.log(price); //299.99
+        console.log(debt); //-1000
+
+        //使用雙引號
+        let message = "Hello ,World!";
+
+        //使用單引號
+        let username = '小明';
+
+        //使用模板字串(反引號)
+        let greeting = `你好, ${username}`;
+
+        //包含特殊字元的字串
+        let quote = "他說 :\"今天天氣很好、";
+        let multiLine = `這是
+        多行
+        字串`;
+        //跳脫字元 \"表"  \'表' \\表\ \n換行
+        
+        console.log(message);
+        console.log(greeting);
+        console.log(quote);
+        console.log(multiLine);
+
+        //檢查資料型別 typeof
+        let name1 = "小明";
+        let age1 = 25;
+        let isStudent = true;
+        let nothing = null;
+        let undefined_var;
+        
+        console.log(typeof name1); //string
+        console.log(typeof age1); //number
+        console.log(typeof isStudent); //boolean
+        console.log(typeof nothing); //object(JavaScript 的歷史 bug)
+        console.log(typeof undefined_var); //undefined
+
+        console.log(undefined_var); //undefined
+        console.log(nothing); //null
+        let result = name1 / 2;
+        console.log(result); //NAN
+
+        //運算子 + - * / % ** ++ --
+        let a = 10;
+        let b = 3;
+
+        console.log(a + b); //13
+        console.log(a - b); //7
+        console.log(a * b); //30
+        console.log(a / b); //3.333
+        console.log(a % b); //1餘數運算
+        console.log(a ** b); //10的3次方
+        console.log(a += b); // a = a + b
+        console.log(a -= b); // a = a - b
+        console.log(a *= b); // a = a * b
+        console.log(a /= b); // a = a / b
+        console.log(a %= b); // a = a % b
+
+        //a++ 先印a後+1 ++a 先+1後印a
+
+        let x = 5;
+        let y = "5";
+        
+        //相等比較
+        console.log( x == y); //true (寬鬆相等,會轉換型別)
+        console.log( x === y); //false (嚴謹相等,不會轉換型別)
+
+        //不等比較
+        console.log( x != y); //false 
+        console.log( x !== y); //true
+        
+        //大小比較 > >= < <=
+        //特殊範例
+        console.log("a" < "b" ,"a".charCodeAt(), "b".charCodeAt());
+
+        //邏輯運算 && || 
+        let isTrue = true;
+        let isFalse = false;
+
+        console.log(!isFalse)
+        console.log(!isTrue)
+        console.log(isTrue && (isTrue || isFalse))
+        console.log((isTrue && isTrue) || isFalse)
+
+        //條件判斷 if...else  if....else if....else
+        let myage = 20;
+        if(myage >= 18){
+            console.log("已成年");
+        }else{
+            console.log("未成年");
+        }
+
+        let ans = myage == 0 ? "剛出生" : myage <= 20 ? "未成年" : "已成年" ; // 三元運算
+        console.log(ans); 
+        
+        if(myage == 0){
+            console.log("剛出生");
+        }else if(myage <= 20){
+            console.log("未成年");
+        }else{
+            console.log("已成年");
+        }
+        //注意!!需最難達成需放於判斷最前面!!
+
+        let day = 3;
+
+        switch(day){
+            case 1:
+                console.log("星期一");
+                break;
+            case 2:
+                console.log("星期二");
+                break;
+            case 3:
+                console.log("星期三");
+                break;
+            case 4:
+                console.log("星期四");
+                break;
+            case 5:
+                console.log("星期五");
+                break;
+            case 6:
+                console.log("星期六");
+                break;
+            case 7:
+                console.log("星期天");
+                break;
+            default:
+                console.log("無效");
+                break;
+        }
+
+        let grade = "B";
+
+        switch(grade){
+            case "A+":
+            case "A":
+                console.log("優秀");
+                break;
+            case "B+":
+            case "B":
+                console.log("良好");
+                break;
+            case "C+":
+            case "C":
+                console.log("普通");
+                break;
+            default:
+                console.log("無效");
+                break;
+        }
+
+        //for迴圈
+        let sum = 0;
+        for (let i = 0; i <= 10; i++){
+            sum+=i
+        }
+        console.log(sum);
+
+        //while 迴圈
+        let num = 1;
+        while (num <= 100){
+            if(num % 2 === 0){
+                console.log(num);
+            }
+            num++;
+        }
+
+        //do...while
+        let num1 = 0;
+        do{
+            console.log(`Your num is ${num1}`);
+            num1++;
+        }while(num1 < 3); //while後的;很重要
+
+        //break & continue
+        for(let i = 1; i <= 10; i++){
+            if(i === 5){
+                break;
+            }
+            console.log(i);
+        }
+
+        for(let i = 1; i <= 10; i++){
+            if(i % 2 === 0){
+                continue;
+            }
+            console.log(i);
+        } 
+        
+        //99乘法表
+        for(let i = 1; i < 10; i++){
+            for(let y = 1; y < 10; y++){
+                console.log(`${i} * ${y} = ${i * y}`);
+            }
+        }
+
+        
+
+    </script>
+
+    <!-- <script src="script.js"></script>   -->
+
+</body>
+</html>

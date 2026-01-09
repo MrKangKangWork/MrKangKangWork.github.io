@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first C# Javascript Web</title>  
+</head>
+<body>
+    <h1>Hello, Everyone!</h1>
+
+    <button onclick="showMessage()">CLICK ME</button>
+    <input type="text" onchange="handleChange(this.value)" >
+
+    <h1 id="title">My web</h1>
+    <div id="container">
+        <p class="text">first word</p>
+        <p class="text">second word</p>
+        <button id="btn">CLICK ME</button>
+        <p class="text">third word</p>
+        <input type="text" name="username" value="user">
+    </div>
+    <p >change line</p>
+    <button id="button1">CLICK ME</button>
+    <button id="removeBtn">CLICK ME</button>
+
+    <input type="text" onchange="handleChange1(event)">
+    <input type="text" onkeydown="handleKeyDown(event)">
+    <a href="https://example.com" onclick="handleLink(event)">Go to outside web</a>
+
+    <script>
+        function showMessage(){
+            alert("Button already been clicked");
+        }
+
+        function handleChange(value){
+            console.log("Input value is: "+value);
+        }
+
+        //確認對話框 回傳true 或 false
+        let result = confirm("Are you sure to into web?");
+        if(result){
+            console.log("User select yes");
+        }else{
+            console.log("User select no");
+        }
+
+        //輸入對話框 回傳使用者輸入字串
+        let name = prompt("Please input your name:", "Default"); //Default 預設值
+        if(name){
+            console.log("Hallo, " + name);
+        }
+
+        let timeoutId = setTimeout(() => {
+            console.log("After 3 sec to start");
+        },3000)
+
+        //clearTimeout(timeoutId)
+
+        let counter = 0;
+        let intervalId = setInterval(() => {
+            counter++;
+            console.log("counter: " + counter);
+            if(counter >= 10){
+                clearInterval(intervalId);
+                console.log("Stop interval timer")
+            }
+        },1000);
+
+        //開啟新視窗
+        let newWindow = window.open("https://www.google.com", "_blank", "width=500,height=400");
+        
+        //關閉視窗
+        //newWindow,close();
+        
+        //調整視窗大小
+        window.resizeTo(800,600);
+
+        //screen物件
+        console.log("螢幕寬度: " + screen.width);
+        console.log("螢幕高度: " + screen.height);
+        console.log("可用寬度: " + screen.availWidth);//排除工作列
+        console.log("可用高度: " + screen.availHeight);//排除工作列
+        //色彩資訊
+        console.log("色彩深度: " + screen.colorDepth);
+        console.log("像素深度: " + screen.pixelDepth);
+        //方向資訊
+        console.log("螢幕方向: " + screen.orientation.type);
+
+        let element = document.getElementById("container");
+        console.log(element);
+
+        let paragraphs = document.getElementsByTagName("p");
+        console.log(paragraphs.length);
+        console.log(paragraphs[0]);
+
+        let textElement = document.getElementsByClassName("text");
+        console.log(textElement.length);
+
+        let inputs = document.getElementsByName("username");
+        console.log(inputs[0].value)  //user
+
+        //選擇第一個符合條件的元素(返回element物件)
+        let firstP = document.querySelector("p");
+        let title = document.querySelector("#title"); //#表id
+        let textClass = document.querySelector(".text"); //.表class
+
+        //選擇所有符合條檢的元素(返回NodeList)
+        let allTexts = document.querySelectorAll(".text");
+        let allButtons = document.querySelectorAll("button");
+
+        console.log(allTexts);
+        console.log(allButtons);
+
+        let btn = document.getElementById("btn");
+        btn.onclick = function(){
+            alert("Id btn been clicked")
+        }
+
+        let button1 = document.getElementById("button1");
+        let removeBtn = document.getElementById("removeBtn");
+
+        function handleClick(event){
+            alert("ID button1 been clicked");
+            console.log("事件類型: " + event.type);
+            console.log("目標元素: " + event.target.tagName);
+            console.log("滑鼠位置: " + event.clientX + ", " + event.clientY);
+            console.log("是否按下 ctrl: " + event.ctrlKey);
+        }
+
+        button1.addEventListener("click", handleClick);
+        removeBtn.addEventListener("click", function(){
+            button1.removeEventListener("click",handleClick);
+            console.log("event been remove");
+        });
+
+        function handleChange1(event){
+            console.log("input value: " + event.target.value);
+            console.log("key type: " + event.type);
+        }
+
+        function handleKeyDown(event){
+            console.log("push key:  " + event.key);
+            console.log("key code: " + event.keyCode);
+
+            if(event.key === 'Tab'){
+                event.prevenDefault();
+                console.log("already stop key tab ");
+            }
+        }
+
+        function handleLink(event){
+            event.prevenDefault();
+            console.log('stop to link outside web');
+        }
+
+
+
+    </script>
+</body>
+</html>

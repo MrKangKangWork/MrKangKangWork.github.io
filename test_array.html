@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first C# Javascript Web</title>  
+</head>
+<body>
+    <h1>Hello, Everyone!</h1>
+
+    <script>
+        //方法1:使用方括號(推薦)
+        let emptyArray = [];
+        let numbers = [1, 2, 3, 4, 5];
+        let fruits = ["apple", "banana", "orange"];
+
+        //方法2:使用new Array() 建構函式
+        let emptyArray2 = new Array();
+        let numbers2 = new Array(1, 2, 3, 4, 5);
+        let fruits2 = new Array("apple", "banana", "orange");
+
+        console.log(numbers);
+        console.log(numbers2);
+        console.log(fruits);
+        console.log(fruits2);
+
+        //特殊情況
+        let arr1 = new Array(3);
+        let arr2 = [3];
+
+        console.log(arr1.length);
+        console.log(arr2.length);
+        console.log(arr1[0]);
+        console.log(arr2[0]);
+
+        let colors =["red", "green", "blue"];
+
+        console.log(colors[0]);
+        console.log(colors[1]);
+        console.log(colors[2]);
+
+        colors[1] = "yellow";
+        console.log(colors);
+
+        let students = ["小明", "小華", "小李", "小王"];
+
+        //for 迴圈遍歷陣列
+        for(let i = 0; i < students.length; i++){
+            console.log(`學生 ${i+1} : ${students[i]}`);
+        }
+
+        // 使用for...of
+        for(let student of students){
+            console.log(`學生 : ${student}`);
+        }
+
+        //使用forEach
+        students.forEach((student, index) => {
+            console.log(`學生 ${index+1} : ${student}`)
+        });
+
+        //常用方法
+        let animals = ["dog", "cat"];
+
+        //尾端新增元素
+        animals.push("fox");
+        console.log(animals);
+
+        //在開頭新增元素
+        animals.unshift("fish");
+        console.log(animals);
+
+        //移除尾端元素
+        let lastAnimal = animals.pop();
+        console.log(lastAnimal);
+        console.log(animals);
+
+        //移除開頭元素
+        let firstAnimal = animals.shift();
+        console.log(firstAnimal);
+        console.log(animals);
+
+        let numbers1 = [1, 2, 3, 4, 5];
+        //檢查是否包含某個元素
+        console.log(numbers1.includes(3)); //true
+        console.log(numbers1.includes(6)); //false
+
+        //尋找元素索引
+        console.log(numbers1.indexOf(4)); //3
+        console.log(numbers1.indexOf(7)); //-1 找不到
+
+        //將陣列轉換為字串
+        let fruits1 = ["apple", "banana", "orange"];
+        console.log(fruits1.join(", ")); //apple, banana, orange
+
+        //建立物件
+        let person = {
+            name: "小明",
+            age: 25,
+            city: "台北",
+            isStudent: true
+        };
+        console.log(person);
+
+        let car = {
+            brand: "Toyota",
+            model: "Camry",
+            year: 2020,
+            color: "白色"
+        };
+
+        console.log(car.brand);
+        console.log(car.year);
+
+        console.log(car["model"]);
+        console.log(car["color"]);
+
+        //修改屬性
+        car.year = 2021;
+        car["color"] = "黑色"
+        console.log(car);
+        
+        console.log(car.price); //undefined
+        console.log(car["engine"]); //undefined
+
+        if(person.email){
+            console.log("Email: " + person.email)
+        }else{
+            console.log("No Email")
+        }
+
+        //可選鏈運算子(?.) -- 避免錯誤
+        console.log(person.email?.toUpperCase()); // undefined 不會報錯
+
+        let company = {
+            name: "科技公司",
+            dep: {
+                it: {
+                    manager: "張經理"
+                }
+            }
+        };
+
+        //傳統方式(可能報錯)
+        // console.log(company.dep.hr.manager); //錯誤，不存在
+        console.log(company.dep?.hr?.manager); //undefined (safe)
+        console.log(company.dep?.it?.manager); //張經理
+
+        //應用範例
+        let student = {
+            name: "小華",
+            contact: {
+                phone: "0912345678"
+            }
+        };
+
+        let studentEmail = student.contact?.email || "No email";
+        let studentPhone = student.contact?.phone || "No phone";
+        console.log("Contact method: ",{studentEmail, studentPhone});
+
+        let book = {
+            title: "三隻小豬",
+            author: "小明"
+        }
+        //新增屬性
+        book.pages = 300;
+        book["publisher"] = "嘿嘿出版";
+        console.log(book);
+
+        //刪除屬性
+        delete book.pages;
+
+        for(let key in book){
+            console.log(`${key} : ${book[key]}`);
+        }
+
+        if("title" in book){
+            console.log("have title");
+        }
+
+
+
+    </script>
+</body>
+</html>

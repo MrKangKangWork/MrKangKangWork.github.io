@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<style>
+    #draggable{
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first C# Javascript Web</title>  
+</head>
+<body>
+    <h1>Hello, Everyone!</h1>
+
+    <div id="draggable">Drag me </div>
+
+    <script>
+        creatDraggbleElement(document.getElementById('draggable'));
+
+        function creatDraggbleElement(element){
+            let isDragging = false;
+            let initMouseX, initMouseY, initElementX, initElementY;
+
+            element.addEventListener('mousedown', function(event){ //表示使用者「點到這個東西了」
+                isDragging = true;
+                initMouseX = event.clientX;
+                initMouseY = event.clientY;
+                initElementX = element.offsetLeft;
+                initElementY = element.offsetTop;
+
+                //阻止文字選取
+                event.preventDefault();
+            })
+
+            document.addEventListener('mousemove', function(event){ //監聽「滑鼠移動中」
+                if(!isDragging) return
+
+                const mouseMoveX = event.clientX - initMouseX;
+                const mouseMoveY = event.clientY - initMouseY;
+
+                element.style.left = (initElementX + mouseMoveX) + 'px';
+                element.style.top = (initElementY + mouseMoveY) + 'px';
+            });
+            document.addEventListener('mouseup', function(event){ //監聽「放開滑鼠」
+                isDragging = false;
+            });
+        }
+    </script>
+</body>
+</html>

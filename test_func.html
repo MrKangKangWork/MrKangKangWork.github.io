@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first C# Javascript Web</title>  
+</head>
+<body>
+    <h1>Hello, Everyone!</h1>
+
+    <script>
+
+        function showWelcome(){
+            console.log("===================");
+            console.log("Welcome to our web");
+            console.log("Have a nice day");
+            console.log("===================");
+        }
+        // 呼叫函式
+        showWelcome();
+
+        function sayHello(name){
+            console.log(`Hello, ${name}`);
+            console.log("===================");
+        }
+
+        sayHello("小明")
+
+        function multiply(a,b){
+            return a * b
+        }
+
+        let price = 100;
+        let quantity = 3;
+        let total = multiply(price, quantity);
+        console.log(`總價: ${total}`);
+
+        //預設值
+        function introduce(name, age = 0, city = "未知"){
+            console.log(`我是 ${name}, ${age}歲, 住在${city} `)
+        }
+
+        introduce("小明");
+        introduce("小明", 25);
+        introduce("小明", 25, "台北");
+
+        //JSDoc 樣板註解
+        /**
+         * Check if the person is at leasst 18 years old based on the given birth year.
+         * @param {number} birthYear - The year of birth (e.g., 2005 )
+         * @returns {boolean} Returns true if the person is 18 or older, otherwise faalse.
+         * @example
+         * isAudlt(2000); //true(if current year is 2025)
+         * isAudlt(2010); //false
+         */
+        function isAudlt(birthYear){
+            const currentYear = new Date().getFullYear();
+            return (currentYear - birthYear) >= 18;
+        }
+        
+        //箭頭函式
+        const addArrow = (a, b) => a + b;
+
+        //單一參數可省略括號(單一表達式)
+        const double = x => x * 2;
+
+        //無參數需括空格
+        const sayHelloA = () => console.log("Hello!");
+
+        console.log(addArrow(5, 3));
+        console.log(double(10));
+        sayHelloA();
+
+        //應用範例
+        let numbers = [1, 2, 3, 4, 5];
+
+        number.forEach(function(num) {
+            console.log(`數字: ${num}`);
+        })
+
+        const calculator = {
+            add: function(a, b){
+                return a + b;
+            },
+            multiply: function(a, b){
+                return a * b;
+            }
+        };
+        console.log(calculator.add(5, 3));
+        console.log(calculator.multiply(4, 6));
+
+        let glovalVar = "我是全域變數";
+
+        function testScope() {
+            //區域變數
+            let localVar = "我是區域變數";
+
+            console.log(glovalVar);
+            console.log(localVar);
+        }
+
+        testScope();
+        console.log(glovalVar);
+        //console.log(localVar); //錯誤!!無法存取區域變數
+
+        function outerFunction(){
+            let message = "Hello!!! everyone!!!!"
+
+            function innerFunction(){
+                document.write(message);
+            }
+            return innerFunction;
+        }
+
+        let myFunction = outerFunction();
+        myFunction();
+        
+        
+        //計數器閉包
+        function creatCountwe(){
+            let count = 0;
+
+            function increment(){
+                count++;
+                console.log(`計數: ${count}`);
+            }
+
+            function getCount(){
+                return count;
+            }
+
+            return{
+                increment,
+                getCount
+            };
+        }
+
+        const counter = creatCountwe();
+        counter.increment(); //計數:1
+        counter.increment(); //計數:2
+        console.log(counter.getCount()); //2
+
+        function room(){
+            console.log(this.word);
+        }
+
+        var word = 'A'; //全域變數
+
+        var obj ={
+            word: 'B',
+            first: room,
+            second:{
+                word: 'C',
+                goto: room
+            }
+        };
+
+        //不同呼叫方式,this指向不同物件
+        room(); //輸出A this指向全域物件
+        obj.first(); //輸出B this指向 obj
+        obj.second.goto(); //輸出C this指向 obj.second
+        console.log(this); // 遊覽器指向window,在Node.js指向global
+
+        const person ={
+            name: '小名',
+            age: 25,
+            sayHello(){
+                console.log(`你好, 我是${this.name}, 今年${this.age}歲`);
+            },
+            birthday: function(){
+                this.age++;
+                console.log(`生日快樂! 現在${this.age}歲了`);
+            }
+        };
+
+        person.sayHello();
+        person.birthday();
+        
+
+        
+    </script>
+</body>
+</html>
